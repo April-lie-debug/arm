@@ -82,7 +82,8 @@ def hybrid_bai(K, delta, sigma_sq, r_mean, duel_matrix, beta_init, epsilon, alph
     for t in range(1, sim_rounds + 1):
         # 2. 参数估计
         beta_hat = estimate_beta(K, T_c, S_c, N, W, beta_init, sigma_sq, epsilon, alpha, max_iter)
-        
+        if t % 1000 == 0:
+            print(f"回合 {t}: 当前 β 估计: {beta_hat}")
         # 为了计算 I_ii，需要重新运行 EstimateBeta 的部分逻辑 (Fisher 信息计算)
         I_ii = np.zeros(K)
         for i in range(K):
